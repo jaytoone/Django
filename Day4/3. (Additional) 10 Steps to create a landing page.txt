@@ -1,0 +1,16 @@
+1. Mobirise 에서 화면 및 내용 구성 진행 (https://mobirise.com/)
+2. Publish로 전체 파일 저장 
+3. @ cmd, activate env 진행 -> django-admin startproject design_1 -> cd design_1 -> python manage.py startapp main -> @ Atom, "Add project folder"
+4. settings.py 수정 : INSTALLED_APPS : 추가 (‘main’) -> LANGUAGE_CODE : 변경 (‘ko-kr’) -> TIME_ZONE : 변경 (‘Asia/Seoul’) -> 최하단 추가 : STATIC_ROOT = os.path.join(BASE_DIR, 'static'))
+5. urls.py 수정 : from main import views & path('', views.index, name='index')
+6. views.py 수정 : def index(request): return render(request, 'main/index.html', {})
+7. Mobirise published files 이동 -> index.html : main\templates\main\index.html, assets (except project.mobirise) : main\static\main\assets
+8. index.html 상단 추가 : {% load static %}
+9. index.html 에서 assets 경로 수정 (경로 상 가장 앞의 ‘assets/’만 수정 진행, PDF 슬라이드 내 스크린샷 참고) : Ctrl+F 로 찾으면서 assets/ -> static/main/assets/
+10. 전체 저장 후 : python manage.py collectstatic -> python manage.py runserver
+
++ 
+필요 시 추가로 활용 (비디오 & 애니메이션 템플릿 서비스)
+1) Promo @ https://goo.gl/YAJhAA 
+2) Shakr @ https://goo.gl/pAMluv 
+3) Wideo @ http://www.wideo.co (http://goo.gl/E5h0mH)

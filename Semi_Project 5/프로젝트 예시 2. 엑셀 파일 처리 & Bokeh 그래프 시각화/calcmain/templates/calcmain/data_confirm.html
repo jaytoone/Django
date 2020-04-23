@@ -1,0 +1,42 @@
+{% extends 'calcmain/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="title text-center">
+        <h1 class="title title-introduction">Confirm the data</h1>
+
+        <table class="table table-hover table-main">
+            <tr>
+                <td style="width: 55%;">Study name</td>
+                <td><b>{{ study.study_name }}</b></td>
+            </tr>
+            <tr>
+                <td style="width: 55%;">Treatment name</td>
+                <td><b>{{ study.treatment_name }}</b></td>
+            </tr>
+            <tr>
+                <td style="width: 55%;">Number of patients <b>in imported data</b> (A)</td>
+                <td><b>{{ num_patients_imported }}</b></td>
+            </tr>
+            <tr>
+                <td style="width: 55%;">Number of enrolled patients <br><b>having unequivocal radiologic progression, symptomatic progression or death </b>(B)</td>
+                <td><b>{{ study.up_patients }}</b></td>
+            </tr>
+            <tr>
+                <td style="width: 55%;">Number of <b>enrolled</b> patients (A+B)</td>
+                <td><b>{{ num_all_patients }}</b></td>
+            </tr>
+        </table>
+
+        <a class="btn btn-lg btn-default btn-main btn" href="{% url 'calcmain:dataimport' %}" role="button">Re-import data</a>
+        <a class="btn btn-lg btn-info btn-main btn" id="loading" href="{% url 'calcmain:data_process' pk=study.pk %}" role="button">Confirm</a>
+        <!-- <a class="btn btn-lg btn-info btn-main btn" id="extraprogress1" href="{% url 'calcmain:data_process' pk=study.pk %}" role="button">Confirm2</a> -->
+
+    </div>
+
+</div>
+
+{% endblock %}

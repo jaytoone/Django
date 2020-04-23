@@ -1,0 +1,16 @@
+<!-- {{ keyword }} -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}" />
+<div>
+<center>
+  <br>
+  <br>
+  <br>
+  <br>
+<h2> Recent 10 Headline about '{{ keyword }}' </h2>
+<br>
+{% for item in crawl_result %}
+  <p><a href={{ item.1 }} target='blank' style="color: green">{{ item.0 }}</a></p>
+{% endfor %}
+</center>
+</div>

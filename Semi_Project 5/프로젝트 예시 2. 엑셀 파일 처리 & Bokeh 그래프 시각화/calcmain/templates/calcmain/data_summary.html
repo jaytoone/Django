@@ -1,0 +1,79 @@
+{% extends 'calcmain/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container">
+
+    <div class="title text-center">
+        <h1 class="title title-introduction">Summary of the data</h1>
+    </div>
+
+    <div class="div-aligncenter div-centered">
+        <table class="table table-hover table-summary">
+            <tr>
+                <td>Treatment</td>
+                <td><b>{{ study.treatment_name }}</b></td>
+            </tr>
+            <tr>
+                <td>Number of enrolled patients</td>
+                <td><b>{{ num_all_patients }}</b></td>
+            </tr>
+            <tr>
+                <td>Number of enrolled patients <br>having unequivocal radiologic progression, <br>symptomatic progression or death</td>
+                <td><b>{{ study.up_patients }}</b></td>
+            </tr>
+        </table>
+
+        <p class="graph-title" style="margin-top: 0%; margin-bottom: 0%;">Waterfall plot</p>
+        {{ script | safe }}
+        {{ div | safe }}
+        <p class="graph-upmeaning" style="margin-left: 12%; margin-top: -2%;"><b>Distribution of the percent-change(%) of patients in imported data</b>
+        <p class="graph-upmeaning" style="margin-left: 12%; font-size: 0.77em;">(Patients having unequivocal radiologic progression, symptomatic progression or death <b>are not included<b>)</p>
+
+        <table class="table table-hover table-summary">
+            <tr>
+                <td>Proportion of patients who were diagnosed with partial response<br><b>(percent change ≤ -30%)</b></td>
+                <td><b>{{ partial_response_prop }}%</b></td>
+            </tr>
+            <tr>
+                <td>Proportion of patients who were diagnosed with progression<br><b>(percent change ≥ +20%, unequivocal, symptomatic progression  or death)</b></td>
+                <td><b>{{ progression_prop }}%</b></td>
+            </tr>
+        </table>
+
+        <div class="select-summary">
+            <label for="sel-assumption">Which results do you want to confirm?</label>
+            <select class="form-control" id="sel-assumption" name="sel-assumption" style="font-weight: bold">
+                <option value="0" style="font-weight: bold">Please select an assumption.</option>
+                <option value="1">Assumption 1. Same radiologist re-assesses tumor response.</option>
+                <option value="2">Assumption 2. Another radiologist re-assesses tumor response.</option>
+            </select>
+        </div>
+
+        <a class="btn btn-lg btn-default btn-processed" href="{% url 'calcmain:dataimport' %}" role="button">Re-import data</a>
+        <button type="submit" class="btn btn-lg btn-info btn-processed" id="check_assumption">Calculate reproducibility of the results</button>
+    </div>
+</div>
+
+
+<script language="javascript">
+    document.getElementById('check_assumption').onclick = function() {
+        var assumption = document.getElementById("sel-assumption").value;
+        if(assumption == 0){
+            alert("Please select an assumption.");
+            document.getElementById("sel-assumption").focus();
+        }else if(assumption == 1){
+            document.location.href = "{% url 'calcmain:data_reassessment1' pk=study.pk %}";
+            $.LoadingOverlay("show");
+        }else if(assumption == 2){
+            document.location.href = "{% url 'calcmain:data_reassessment2' pk=study.pk %}";
+            $.LoadingOverlay("show");
+        }
+    }
+</script>
+
+
+{% endblock %}
+

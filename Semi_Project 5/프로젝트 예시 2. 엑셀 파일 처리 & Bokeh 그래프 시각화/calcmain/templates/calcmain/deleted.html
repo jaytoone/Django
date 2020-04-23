@@ -1,0 +1,22 @@
+{% extends 'calcmain/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="title text-center">
+        <h1 class="title title-introduction" style="padding-top: 11.5%;">Measurement variability calculator (RECIST 1.1)</h1>
+
+        <div class="well well-outro div-centered">
+            Thank you for your interest.
+            <br><b>Your data has been deleted safely.</b>
+        </div>
+
+        <a class="btn btn-lg btn-info btn-main btn" href="{% url 'calcmain:dataimport' %}" role="button">Re-import data</a>
+    </div>
+
+</div>
+
+{% endblock %}
+
