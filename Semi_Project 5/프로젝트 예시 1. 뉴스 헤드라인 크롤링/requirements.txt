@@ -6,7 +6,7 @@ google-images-download==2.8.0
 idna==2.8
 lxml==4.4.1
 numpy==1.17.4
-opencv-python==4.1.1.26
+opencv-python==4.2.0.32
 Pillow==5.4.1
 pytz==2019.3
 requests==2.22.0
